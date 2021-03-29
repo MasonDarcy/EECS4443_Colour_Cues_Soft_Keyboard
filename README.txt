@@ -5,3 +5,5 @@
 
 2. Letter_Prediction is the android app with a basic prototype.
   a. reads the hash.ser file from the raw folder and populates a hashmap
+  b. contains a single activity and layout with Views representing keyboard buttons
+  c. uses hashMap to change the button colors
