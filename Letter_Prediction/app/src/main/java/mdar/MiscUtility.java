@@ -33,6 +33,16 @@ public final class MiscUtility {
         }
         return "#FF000000";
     }
+    
+     public static String noRedProbToColor(Float prob) {
+
+        for(int i = 0; i < noRedColorPairs.length; i++)  {
+            if(prob >= noRedColorPairs[i].probLowerBound && prob <= noRedColorPairs[i].probUpperBound) {
+                return noRedColorPairs[i].hexCode;
+            }
+        }
+        return "#FF000000";
+    }
 
     public static char mapNumberToLetter(int i) {
         return (char) (65 + i);
