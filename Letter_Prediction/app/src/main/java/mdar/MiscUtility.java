@@ -15,6 +15,14 @@ public final class MiscUtility {
             new ColorPair("#FF50ff45", 0.15F, 0.3F),
             new ColorPair("#FF0fff00", 0.3F, 1F)
     };
+    
+      private final static ColorPair[] noRedColorPairs = {
+            new ColorPair("#FFd8e6db", 0.0F, 0.038F),
+            new ColorPair("#FFd4ffd1", 0.038F, 0.1F),
+            new ColorPair("#FF96ff8f", 0.1F, 0.15F),
+            new ColorPair("#FF50ff45", 0.15F, 0.3F),
+            new ColorPair("#FF0fff00", 0.3F, 1F)
+    };
 
     public static String unstableProbToColor(Float prob) {
 
