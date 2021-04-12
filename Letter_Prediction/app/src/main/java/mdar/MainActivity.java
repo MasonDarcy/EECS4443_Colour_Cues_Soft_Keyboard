@@ -17,6 +17,7 @@ import com.example.letter_prediction.R;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.ObjectInputStream;
+import java.security.Key;
 import java.util.HashMap;
 
 import static java.lang.Character.toLowerCase;
@@ -31,6 +32,7 @@ public class MainActivity extends AppCompatActivity {
 TextView editField;
 Button a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, r, s, t, u, v, w, x, y, z, bk, space, test;
 Button [] butts = new Button[27];
+
 HashMap probabilitySet;
 ProgressBar progressBar;
 String neutralColor = "#FFd8e6db";

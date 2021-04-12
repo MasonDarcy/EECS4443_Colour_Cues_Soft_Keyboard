@@ -10,6 +10,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name="mdar.MainActivity">
+        </activity>
+        <activity android:name="mdar.ColorCuesSetup">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
