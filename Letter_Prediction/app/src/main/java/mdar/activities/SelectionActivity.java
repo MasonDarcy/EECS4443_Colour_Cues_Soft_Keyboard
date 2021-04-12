@@ -1,4 +1,4 @@
-package mdar;
+package mdar.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -16,6 +16,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.ObjectInputStream;
 import java.util.HashMap;
+
+import mdar.model.GlobalMap;
 
 public class SelectionActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
@@ -57,8 +59,6 @@ private void init() {
 
     public void onItemSelected(AdapterView<?> parent, View view,
                                int pos, long id) {
-        // An item was selected. You can retrieve the selected item using
-        // parent.getItemAtPosition(pos)
         keyboardType = parent.getItemAtPosition(pos).toString();
         Log.i("DEBUG", keyboardType);
     }

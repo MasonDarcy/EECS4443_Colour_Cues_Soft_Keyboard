@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Letter_Prediction</string>
+    <string name="app_name">QWERTY With Color Cues</string>
     <string-array name="keyboard_array">
         <item>Vanilla</item>
         <item>Green Red</item>

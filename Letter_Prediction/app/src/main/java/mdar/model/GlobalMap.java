@@ -1,4 +1,4 @@
-package mdar;
+package mdar.model;
 
 import java.util.HashMap;
 

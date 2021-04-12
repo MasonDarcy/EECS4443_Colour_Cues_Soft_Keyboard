@@ -1,4 +1,4 @@
-package mdar;
+package mdar.activities;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
@@ -15,6 +15,10 @@ import android.widget.TextView;
 import com.example.letter_prediction.R;
 
 import java.util.HashMap;
+
+import mdar.model.ColorUtility;
+import mdar.model.GlobalMap;
+import mdar.model.Model;
 
 import static java.lang.Character.toLowerCase;
 
@@ -58,7 +62,7 @@ mutateKeys loops through all the keys and changed their colors.
 private void mutateKeys(float[] probs) {
         if (probs != null) {
                 for (int i = 0; i < probs.length; i++) {
-                    butts[i].setBackgroundColor(Color.parseColor((MiscUtility.probToColor(probs[i], keyboardType))));
+                    butts[i].setBackgroundColor(Color.parseColor((ColorUtility.probToColor(probs[i], keyboardType))));
                 }
         } else {
             for (int i = 0; i < 27; i++) {
@@ -145,132 +149,132 @@ public void onClick(View view) {
             case R.id.a:
                 model.toggle();
                 userInputs.setText(userInputs.getText() + "a");
-                mutateKeys((float[]) probabilitySet.get(MiscUtility.findCurrentWord(userInputs.getText().toString())));
+                mutateKeys((float[]) probabilitySet.get(ColorUtility.findCurrentWord(userInputs.getText().toString())));
                 break;
             case R.id.b:
                 model.toggle();
                 userInputs.setText(userInputs.getText() + "b");
-                mutateKeys((float[]) probabilitySet.get(MiscUtility.findCurrentWord(userInputs.getText().toString())));
+                mutateKeys((float[]) probabilitySet.get(ColorUtility.findCurrentWord(userInputs.getText().toString())));
                 break;
             case R.id.c:
                 model.toggle();
                 userInputs.setText(userInputs.getText() + "c");
-                mutateKeys((float[]) probabilitySet.get(MiscUtility.findCurrentWord(userInputs.getText().toString())));
+                mutateKeys((float[]) probabilitySet.get(ColorUtility.findCurrentWord(userInputs.getText().toString())));
                 break;
             case R.id.d:
                 model.toggle();
                 userInputs.setText(userInputs.getText() + "d");
-                mutateKeys((float[]) probabilitySet.get(MiscUtility.findCurrentWord(userInputs.getText().toString())));
+                mutateKeys((float[]) probabilitySet.get(ColorUtility.findCurrentWord(userInputs.getText().toString())));
                 break;
             case R.id.e:
                 model.toggle();
                 userInputs.setText(userInputs.getText() + "e");
-                mutateKeys((float[]) probabilitySet.get(MiscUtility.findCurrentWord(userInputs.getText().toString())));
+                mutateKeys((float[]) probabilitySet.get(ColorUtility.findCurrentWord(userInputs.getText().toString())));
                 break;
             case R.id.f:
                 model.toggle();
                 userInputs.setText(userInputs.getText() + "f");
-                mutateKeys((float[]) probabilitySet.get(MiscUtility.findCurrentWord(userInputs.getText().toString())));
+                mutateKeys((float[]) probabilitySet.get(ColorUtility.findCurrentWord(userInputs.getText().toString())));
                 break;
             case R.id.g:
                 model.toggle();
                 userInputs.setText(userInputs.getText() + "g");
-                mutateKeys((float[]) probabilitySet.get(MiscUtility.findCurrentWord(userInputs.getText().toString())));
+                mutateKeys((float[]) probabilitySet.get(ColorUtility.findCurrentWord(userInputs.getText().toString())));
                 break;
             case R.id.h:
                 model.toggle();
                 userInputs.setText(userInputs.getText() + "h");
-                mutateKeys((float[]) probabilitySet.get(MiscUtility.findCurrentWord(userInputs.getText().toString())));
+                mutateKeys((float[]) probabilitySet.get(ColorUtility.findCurrentWord(userInputs.getText().toString())));
                 break;
             case R.id.i:
                 model.toggle();
                 userInputs.setText(userInputs.getText() + "i");
-                mutateKeys((float[]) probabilitySet.get(MiscUtility.findCurrentWord(userInputs.getText().toString())));
+                mutateKeys((float[]) probabilitySet.get(ColorUtility.findCurrentWord(userInputs.getText().toString())));
                 break;
             case R.id.j:
                 model.toggle();
                 userInputs.setText(userInputs.getText() + "j");
-                mutateKeys((float[]) probabilitySet.get(MiscUtility.findCurrentWord(userInputs.getText().toString())));
+                mutateKeys((float[]) probabilitySet.get(ColorUtility.findCurrentWord(userInputs.getText().toString())));
                 break;
             case R.id.k:
                 model.toggle();
                 userInputs.setText(userInputs.getText() + "k");
-                mutateKeys((float[]) probabilitySet.get(MiscUtility.findCurrentWord(userInputs.getText().toString())));
+                mutateKeys((float[]) probabilitySet.get(ColorUtility.findCurrentWord(userInputs.getText().toString())));
                 break;
             case R.id.l:
                 model.toggle();
                 userInputs.setText(userInputs.getText() + "l");
-                mutateKeys((float[]) probabilitySet.get(MiscUtility.findCurrentWord(userInputs.getText().toString())));
+                mutateKeys((float[]) probabilitySet.get(ColorUtility.findCurrentWord(userInputs.getText().toString())));
                 break;
             case R.id.m:
                 model.toggle();
                 userInputs.setText(userInputs.getText() + "m");
-                mutateKeys((float[]) probabilitySet.get(MiscUtility.findCurrentWord(userInputs.getText().toString())));
+                mutateKeys((float[]) probabilitySet.get(ColorUtility.findCurrentWord(userInputs.getText().toString())));
                 break;
             case R.id.n:
                 model.toggle();
                 userInputs.setText(userInputs.getText() + "n");
-                mutateKeys((float[]) probabilitySet.get(MiscUtility.findCurrentWord(userInputs.getText().toString())));
+                mutateKeys((float[]) probabilitySet.get(ColorUtility.findCurrentWord(userInputs.getText().toString())));
                 break;
             case R.id.o:
                 model.toggle();
                 userInputs.setText(userInputs.getText() + "o");
-                mutateKeys((float[]) probabilitySet.get(MiscUtility.findCurrentWord(userInputs.getText().toString())));
+                mutateKeys((float[]) probabilitySet.get(ColorUtility.findCurrentWord(userInputs.getText().toString())));
                 break;
             case R.id.p:
                 model.toggle();
                 userInputs.setText(userInputs.getText() + "p");
-                mutateKeys((float[]) probabilitySet.get(MiscUtility.findCurrentWord(userInputs.getText().toString())));
+                mutateKeys((float[]) probabilitySet.get(ColorUtility.findCurrentWord(userInputs.getText().toString())));
                 break;
             case R.id.q:
                 model.toggle();
                 userInputs.setText(userInputs.getText() + "q");
-                mutateKeys((float[]) probabilitySet.get(MiscUtility.findCurrentWord(userInputs.getText().toString())));
+                mutateKeys((float[]) probabilitySet.get(ColorUtility.findCurrentWord(userInputs.getText().toString())));
                 break;
             case R.id.r:
                 model.toggle();
                 userInputs.setText(userInputs.getText() + "r");
-                mutateKeys((float[]) probabilitySet.get(MiscUtility.findCurrentWord(userInputs.getText().toString())));
+                mutateKeys((float[]) probabilitySet.get(ColorUtility.findCurrentWord(userInputs.getText().toString())));
                 break;
             case R.id.s:
                 model.toggle();
                 userInputs.setText(userInputs.getText() + "s");
-                mutateKeys((float[]) probabilitySet.get(MiscUtility.findCurrentWord(userInputs.getText().toString())));
+                mutateKeys((float[]) probabilitySet.get(ColorUtility.findCurrentWord(userInputs.getText().toString())));
                 break;
             case R.id.t:
                 model.toggle();
                 userInputs.setText(userInputs.getText() + "t");
-                mutateKeys((float[]) probabilitySet.get(MiscUtility.findCurrentWord(userInputs.getText().toString())));
+                mutateKeys((float[]) probabilitySet.get(ColorUtility.findCurrentWord(userInputs.getText().toString())));
                 break;
             case R.id.u:
                 model.toggle();
                 userInputs.setText(userInputs.getText() + "u");
-                mutateKeys((float[]) probabilitySet.get(MiscUtility.findCurrentWord(userInputs.getText().toString())));
+                mutateKeys((float[]) probabilitySet.get(ColorUtility.findCurrentWord(userInputs.getText().toString())));
                 break;
             case R.id.v:
                 model.toggle();
                 userInputs.setText(userInputs.getText() + "v");
-                mutateKeys((float[]) probabilitySet.get(MiscUtility.findCurrentWord(userInputs.getText().toString())));
+                mutateKeys((float[]) probabilitySet.get(ColorUtility.findCurrentWord(userInputs.getText().toString())));
                 break;
             case R.id.w:
                 model.toggle();
                 userInputs.setText(userInputs.getText() + "w");
-                mutateKeys((float[]) probabilitySet.get(MiscUtility.findCurrentWord(userInputs.getText().toString())));
+                mutateKeys((float[]) probabilitySet.get(ColorUtility.findCurrentWord(userInputs.getText().toString())));
                 break;
             case R.id.x:
                 model.toggle();
                 userInputs.setText(userInputs.getText() + "x");
-                mutateKeys((float[]) probabilitySet.get(MiscUtility.findCurrentWord(userInputs.getText().toString())));
+                mutateKeys((float[]) probabilitySet.get(ColorUtility.findCurrentWord(userInputs.getText().toString())));
                 break;
             case R.id.y:
                 model.toggle();
                 userInputs.setText(userInputs.getText() + "y");
-                mutateKeys((float[]) probabilitySet.get(MiscUtility.findCurrentWord(userInputs.getText().toString())));
+                mutateKeys((float[]) probabilitySet.get(ColorUtility.findCurrentWord(userInputs.getText().toString())));
                 break;
             case R.id.z:
                 model.toggle();
                 userInputs.setText(userInputs.getText() + "z");
-                mutateKeys((float[]) probabilitySet.get(MiscUtility.findCurrentWord(userInputs.getText().toString())));
+                mutateKeys((float[]) probabilitySet.get(ColorUtility.findCurrentWord(userInputs.getText().toString())));
                 break;
             case R.id.bk:
                 //some of this could be folded into the mutatekeys function
@@ -282,7 +286,7 @@ public void onClick(View view) {
                             butts[i].setBackgroundColor(Color.parseColor(neutralColor));
                         }
                     }else {
-                            mutateKeys((float[]) probabilitySet.get(MiscUtility.findCurrentWord(userInputs.getText().toString())));
+                            mutateKeys((float[]) probabilitySet.get(ColorUtility.findCurrentWord(userInputs.getText().toString())));
                         }
                     }
                 break;
@@ -297,7 +301,7 @@ public void onClick(View view) {
                 Log.i("DEBUG", userInputs.getText().toString());
                 float[] prob = (float[]) probabilitySet.get(userInputs.getText().toString());
                 for(int i = 0; i < prob.length; i++) {
-                    Log.i("DEBUG", "Letter = " + MiscUtility.mapNumberToLetter(i) + ", prob: " + prob[i]);
+                    Log.i("DEBUG", "Letter = " + ColorUtility.mapNumberToLetter(i) + ", prob: " + prob[i]);
                 }
                 break;
             case R.id.enter:

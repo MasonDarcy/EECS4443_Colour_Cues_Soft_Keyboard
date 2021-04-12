@@ -1,8 +1,8 @@
-package mdar;
+package mdar.model;
 
 import android.util.Log;
 
-public final class MiscUtility {
+public final class ColorUtility {
 
     private final static ColorPair[] colorPairs = {
             new ColorPair("#FFff0000", 0.0F, 0.00001F),
@@ -111,4 +111,17 @@ public final class MiscUtility {
         return lastWord;
     }
 
+    public static class ColorPair {
+
+        public ColorPair(String hex, Float probL, Float probH) {
+            this.hexCode = hex;
+            this.probLowerBound = probL;
+            this.probUpperBound = probH;
+        }
+
+        String hexCode;
+        Float probLowerBound;
+        Float probUpperBound;
+
+    }
 }

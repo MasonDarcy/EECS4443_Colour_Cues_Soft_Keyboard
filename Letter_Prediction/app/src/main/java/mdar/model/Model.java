@@ -1,4 +1,4 @@
-package mdar;
+package mdar.model;
 
 public class Model {
 
