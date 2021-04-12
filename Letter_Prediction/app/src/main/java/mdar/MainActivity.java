@@ -53,7 +53,7 @@ mutateKeys loops through all the keys and changed their colors.
 private void mutateKeys(float[] probs) {
         if (probs != null) {
                 for (int i = 0; i < probs.length; i++) {
-                    butts[i].setBackgroundColor(Color.parseColor((MiscUtility.probabilityToColor(probs[i]))));
+                    butts[i].setBackgroundColor(Color.parseColor((MiscUtility.unstableProbToColor(probs[i]))));
                 }
         } else {
             for (int i = 0; i < 27; i++) {
@@ -305,6 +305,9 @@ public void onClick(View view) {
                 break;
             case R.id.space:
                 editField.setText(editField.getText() + " ");
+                for (int i = 0; i < 27; i++) {
+                    butts[i].setBackgroundColor(Color.parseColor(neutralColor));
+                }
                 break;
             case R.id.test:
                 Log.i("DEBUG", editField.getText().toString());

@@ -4,42 +4,44 @@ import android.util.Log;
 
 public final class MiscUtility {
 
-    //This can be improved or simplified
-    public static String probabilityToColor(float prob) {
-        String output = "#FF";
-        Log.i("DEBUG", prob + " is the probability");
-        float whiteLine = 0.03846F;
-        int red = prob <= whiteLine ? 255 : (int) (255 * (1  / (1.5 + prob)));
-        int green = prob >= whiteLine ? 255 : (int) (255 * prob);
-        int blue = (int) (prob <= whiteLine ? 255 * (prob / whiteLine) : 255 * (whiteLine / 1 + prob));
-        if(blue > 0) {
-            blue *= 0.35;
-        }
-        Log.i("DEBUG", "blue: " + blue);
-        if(red < 16) {
-            output += "0" + Integer.toHexString(red);
-        } else {
-            output += Integer.toHexString(red);
-        }
+    private final static ColorPair[] colorPairs = {
+            new ColorPair("#FFff0000", 0.0F, 0.00001F),
+            new ColorPair("#FFff4d4d", 0.00001F, 0.0001F),
+            new ColorPair("#FFff9e9e", 0.0001F, 0.001F),
+            new ColorPair("#FFffcfcf", 0.001F, 0.01F),
+            new ColorPair("#FFfffcfc", 0.01F, 0.038F),
+            new ColorPair("#FFd4ffd1", 0.038F, 0.1F),
+            new ColorPair("#FF96ff8f", 0.1F, 0.15F),
+            new ColorPair("#FF50ff45", 0.15F, 0.3F),
+            new ColorPair("#FF0fff00", 0.3F, 1F)
+    };
+    
+      private final static ColorPair[] noRedColorPairs = {
+            new ColorPair("#FFd8e6db", 0.0F, 0.038F),
+            new ColorPair("#FFd4ffd1", 0.038F, 0.1F),
+            new ColorPair("#FF96ff8f", 0.1F, 0.15F),
+            new ColorPair("#FF50ff45", 0.15F, 0.3F),
+            new ColorPair("#FF0fff00", 0.3F, 1F)
+    };
 
-        if(green < 16) {
-            output += "0" + Integer.toHexString(green);
-        } else {
-            output += Integer.toHexString(green);
-        }
-        if(blue < 16) {
-            output += "0" + Integer.toHexString(blue);
-        } else {
-            output += Integer.toHexString(blue);
-        }
+    public static String unstableProbToColor(Float prob) {
 
-        if(!Float.isNaN(prob)) {
-            Log.i("DEBUG", "Color: " + output);
-
-            return output;
-        } else{
-            return  "#FFFF0000";
+        for(int i = 0; i < colorPairs.length; i++)  {
+            if(prob >= colorPairs[i].probLowerBound && prob <= colorPairs[i].probUpperBound) {
+                return colorPairs[i].hexCode;
+            }
         }
+        return "#FF000000";
+    }
+    
+     public static String noRedProbToColor(Float prob) {
+
+        for(int i = 0; i < noRedColorPairs.length; i++)  {
+            if(prob >= noRedColorPairs[i].probLowerBound && prob <= noRedColorPairs[i].probUpperBound) {
+                return noRedColorPairs[i].hexCode;
+            }
+        }
+        return "#FF000000";
     }
 
     public static char mapNumberToLetter(int i) {
