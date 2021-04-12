@@ -25,6 +25,9 @@ ProgressBar progressBar;
 Button start;
 String keyboardType = "Vanilla";
 
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,7 +46,13 @@ private void init() {
     adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
     spinner.setAdapter(adapter);
     progressBar = findViewById(R.id.progressBar);
-    runStartupThreads();
+
+    //Checks if the file is already loaded, if we are launching an intent to come back here
+    if(!GlobalMap.isLoaded) {
+        runStartupThreads();
+    } else {
+        progressBar.setVisibility(View.GONE);
+    }
 }
 
     public void onItemSelected(AdapterView<?> parent, View view,
@@ -84,6 +93,7 @@ private void init() {
                     // Method for deserialization of object
                     probabilitySet = (HashMap<String, float[]>) in.readObject();
                     GlobalMap.setMap(probabilitySet);
+                    GlobalMap.isLoaded = true;
                     runOnUiThread(new Runnable() {
 
                         @Override

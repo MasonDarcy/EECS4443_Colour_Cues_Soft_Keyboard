@@ -3,6 +3,7 @@ package mdar;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
@@ -24,23 +25,36 @@ date: 2021/03/29
  */
 
 public class KeyboardActivity extends AppCompatActivity {
-TextView editField;
+TextView userInputs;
+TextView phraseHolder;
 Button a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, r, s, t, u, v, w, x, y, z, bk, space, test;
 Button [] butts = new Button[27];
 HashMap probabilitySet;
 String neutralColor = "#FFd8e6db";
 String keyboardType = "";
+int phraseCounter = 0;
+    //Could move this to a string resource or data class if we care
+    String [] phrases =
+            {"The quick brown fox jumped over the lazy dog",
+                    "You can't judge a book by its cover",
+                    "This sentence is incredibly difficult to type",
+                    "Acrophobia is a natural fear of heights",
+                    "A cephalopod is any member of the molluscan class Cephalopoda"};
+
 
 @RequiresApi(api = Build.VERSION_CODES.N)
 @Override
 protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        initializeViews();
-        probabilitySet = GlobalMap.probs;
-        keyboardType = getIntent().getStringExtra("KEYBOARD_TYPE");
-        Log.i("DEBUG", keyboardType);
+        init();
+}
 
+private void init() {
+    initializeViews();
+    probabilitySet = GlobalMap.probs;
+    keyboardType = getIntent().getStringExtra("KEYBOARD_TYPE");
+    phraseHolder.setText(phrases[0]);
 }
 
 /*
@@ -50,7 +64,6 @@ mutateKeys loops through all the keys and changed their colors.
 private void mutateKeys(float[] probs) {
         if (probs != null) {
                 for (int i = 0; i < probs.length; i++) {
-               //     butts[i].setBackgroundColor(Color.parseColor((MiscUtility.greenRedProbToColor(probs[i]))));
                     butts[i].setBackgroundColor(Color.parseColor((MiscUtility.probToColor(probs[i], keyboardType))));
                 }
         } else {
@@ -127,145 +140,167 @@ private void initializeViews() {
         bk = findViewById(R.id.bk);
         butts[26] = bk;
         space = findViewById(R.id.space);
-        editField = findViewById(R.id.testLabelOne);
+        userInputs = findViewById(R.id.userInputs);
        // progressBar = findViewById(R.id.progressBar);
         test = findViewById(R.id.test);
-
+        phraseHolder = findViewById(R.id.phrase_prompt);
     }
 
 public void onClick(View view) {
         switch(view.getId()) {
             case R.id.a:
-                editField.setText(editField.getText() + "a");
-                mutateKeys((float[]) probabilitySet.get(MiscUtility.findCurrentWord(editField.getText().toString())));
+                userInputs.setText(userInputs.getText() + "a");
+                mutateKeys((float[]) probabilitySet.get(MiscUtility.findCurrentWord(userInputs.getText().toString())));
                 break;
             case R.id.b:
-                editField.setText(editField.getText() + "b");
-                mutateKeys((float[]) probabilitySet.get(MiscUtility.findCurrentWord(editField.getText().toString())));
+                userInputs.setText(userInputs.getText() + "b");
+                mutateKeys((float[]) probabilitySet.get(MiscUtility.findCurrentWord(userInputs.getText().toString())));
                 break;
             case R.id.c:
-                editField.setText(editField.getText() + "c");
-                mutateKeys((float[]) probabilitySet.get(MiscUtility.findCurrentWord(editField.getText().toString())));
+                userInputs.setText(userInputs.getText() + "c");
+                mutateKeys((float[]) probabilitySet.get(MiscUtility.findCurrentWord(userInputs.getText().toString())));
                 break;
             case R.id.d:
-                editField.setText(editField.getText() + "d");
-                mutateKeys((float[]) probabilitySet.get(MiscUtility.findCurrentWord(editField.getText().toString())));
+                userInputs.setText(userInputs.getText() + "d");
+                mutateKeys((float[]) probabilitySet.get(MiscUtility.findCurrentWord(userInputs.getText().toString())));
                 break;
             case R.id.e:
-                editField.setText(editField.getText() + "e");
-                mutateKeys((float[]) probabilitySet.get(MiscUtility.findCurrentWord(editField.getText().toString())));
+                userInputs.setText(userInputs.getText() + "e");
+                mutateKeys((float[]) probabilitySet.get(MiscUtility.findCurrentWord(userInputs.getText().toString())));
                 break;
             case R.id.f:
-                editField.setText(editField.getText() + "f");
-                mutateKeys((float[]) probabilitySet.get(MiscUtility.findCurrentWord(editField.getText().toString())));
+                userInputs.setText(userInputs.getText() + "f");
+                mutateKeys((float[]) probabilitySet.get(MiscUtility.findCurrentWord(userInputs.getText().toString())));
                 break;
             case R.id.g:
-                editField.setText(editField.getText() + "g");
-                mutateKeys((float[]) probabilitySet.get(MiscUtility.findCurrentWord(editField.getText().toString())));
+                userInputs.setText(userInputs.getText() + "g");
+                mutateKeys((float[]) probabilitySet.get(MiscUtility.findCurrentWord(userInputs.getText().toString())));
                 break;
             case R.id.h:
-                editField.setText(editField.getText() + "h");
-                mutateKeys((float[]) probabilitySet.get(MiscUtility.findCurrentWord(editField.getText().toString())));
+                userInputs.setText(userInputs.getText() + "h");
+                mutateKeys((float[]) probabilitySet.get(MiscUtility.findCurrentWord(userInputs.getText().toString())));
                 break;
             case R.id.i:
-                editField.setText(editField.getText() + "i");
-                mutateKeys((float[]) probabilitySet.get(MiscUtility.findCurrentWord(editField.getText().toString())));
+                userInputs.setText(userInputs.getText() + "i");
+                mutateKeys((float[]) probabilitySet.get(MiscUtility.findCurrentWord(userInputs.getText().toString())));
                 break;
             case R.id.j:
-                editField.setText(editField.getText() + "j");
-                mutateKeys((float[]) probabilitySet.get(MiscUtility.findCurrentWord(editField.getText().toString())));
+                userInputs.setText(userInputs.getText() + "j");
+                mutateKeys((float[]) probabilitySet.get(MiscUtility.findCurrentWord(userInputs.getText().toString())));
                 break;
             case R.id.k:
-                editField.setText(editField.getText() + "k");
-                mutateKeys((float[]) probabilitySet.get(MiscUtility.findCurrentWord(editField.getText().toString())));
+                userInputs.setText(userInputs.getText() + "k");
+                mutateKeys((float[]) probabilitySet.get(MiscUtility.findCurrentWord(userInputs.getText().toString())));
                 break;
             case R.id.l:
-                editField.setText(editField.getText() + "l");
-                mutateKeys((float[]) probabilitySet.get(MiscUtility.findCurrentWord(editField.getText().toString())));
+                userInputs.setText(userInputs.getText() + "l");
+                mutateKeys((float[]) probabilitySet.get(MiscUtility.findCurrentWord(userInputs.getText().toString())));
                 break;
             case R.id.m:
-                editField.setText(editField.getText() + "m");
-                mutateKeys((float[]) probabilitySet.get(MiscUtility.findCurrentWord(editField.getText().toString())));
+                userInputs.setText(userInputs.getText() + "m");
+                mutateKeys((float[]) probabilitySet.get(MiscUtility.findCurrentWord(userInputs.getText().toString())));
                 break;
             case R.id.n:
-                editField.setText(editField.getText() + "n");
-                mutateKeys((float[]) probabilitySet.get(MiscUtility.findCurrentWord(editField.getText().toString())));
+                userInputs.setText(userInputs.getText() + "n");
+                mutateKeys((float[]) probabilitySet.get(MiscUtility.findCurrentWord(userInputs.getText().toString())));
                 break;
             case R.id.o:
-                editField.setText(editField.getText() + "o");
-                mutateKeys((float[]) probabilitySet.get(MiscUtility.findCurrentWord(editField.getText().toString())));
+                userInputs.setText(userInputs.getText() + "o");
+                mutateKeys((float[]) probabilitySet.get(MiscUtility.findCurrentWord(userInputs.getText().toString())));
                 break;
             case R.id.p:
-                editField.setText(editField.getText() + "p");
-                mutateKeys((float[]) probabilitySet.get(MiscUtility.findCurrentWord(editField.getText().toString())));
+                userInputs.setText(userInputs.getText() + "p");
+                mutateKeys((float[]) probabilitySet.get(MiscUtility.findCurrentWord(userInputs.getText().toString())));
                 break;
             case R.id.q:
-                editField.setText(editField.getText() + "q");
-                mutateKeys((float[]) probabilitySet.get(MiscUtility.findCurrentWord(editField.getText().toString())));
+                userInputs.setText(userInputs.getText() + "q");
+                mutateKeys((float[]) probabilitySet.get(MiscUtility.findCurrentWord(userInputs.getText().toString())));
                 break;
             case R.id.r:
-                editField.setText(editField.getText() + "r");
-                mutateKeys((float[]) probabilitySet.get(MiscUtility.findCurrentWord(editField.getText().toString())));
+                userInputs.setText(userInputs.getText() + "r");
+                mutateKeys((float[]) probabilitySet.get(MiscUtility.findCurrentWord(userInputs.getText().toString())));
                 break;
             case R.id.s:
-                editField.setText(editField.getText() + "s");
-                mutateKeys((float[]) probabilitySet.get(MiscUtility.findCurrentWord(editField.getText().toString())));
+                userInputs.setText(userInputs.getText() + "s");
+                mutateKeys((float[]) probabilitySet.get(MiscUtility.findCurrentWord(userInputs.getText().toString())));
                 break;
             case R.id.t:
-                editField.setText(editField.getText() + "t");
-                mutateKeys((float[]) probabilitySet.get(MiscUtility.findCurrentWord(editField.getText().toString())));
+                userInputs.setText(userInputs.getText() + "t");
+                mutateKeys((float[]) probabilitySet.get(MiscUtility.findCurrentWord(userInputs.getText().toString())));
                 break;
             case R.id.u:
-                editField.setText(editField.getText() + "u");
-                mutateKeys((float[]) probabilitySet.get(MiscUtility.findCurrentWord(editField.getText().toString())));
+                userInputs.setText(userInputs.getText() + "u");
+                mutateKeys((float[]) probabilitySet.get(MiscUtility.findCurrentWord(userInputs.getText().toString())));
                 break;
             case R.id.v:
-                editField.setText(editField.getText() + "v");
-                mutateKeys((float[]) probabilitySet.get(MiscUtility.findCurrentWord(editField.getText().toString())));
+                userInputs.setText(userInputs.getText() + "v");
+                mutateKeys((float[]) probabilitySet.get(MiscUtility.findCurrentWord(userInputs.getText().toString())));
                 break;
             case R.id.w:
-                editField.setText(editField.getText() + "w");
-                mutateKeys((float[]) probabilitySet.get(MiscUtility.findCurrentWord(editField.getText().toString())));
+                userInputs.setText(userInputs.getText() + "w");
+                mutateKeys((float[]) probabilitySet.get(MiscUtility.findCurrentWord(userInputs.getText().toString())));
                 break;
             case R.id.x:
-                editField.setText(editField.getText() + "x");
-                mutateKeys((float[]) probabilitySet.get(MiscUtility.findCurrentWord(editField.getText().toString())));
+                userInputs.setText(userInputs.getText() + "x");
+                mutateKeys((float[]) probabilitySet.get(MiscUtility.findCurrentWord(userInputs.getText().toString())));
                 break;
             case R.id.y:
-                editField.setText(editField.getText() + "y");
-                mutateKeys((float[]) probabilitySet.get(MiscUtility.findCurrentWord(editField.getText().toString())));
+                userInputs.setText(userInputs.getText() + "y");
+                mutateKeys((float[]) probabilitySet.get(MiscUtility.findCurrentWord(userInputs.getText().toString())));
                 break;
             case R.id.z:
-                editField.setText(editField.getText() + "z");
-                mutateKeys((float[]) probabilitySet.get(MiscUtility.findCurrentWord(editField.getText().toString())));
+                userInputs.setText(userInputs.getText() + "z");
+                mutateKeys((float[]) probabilitySet.get(MiscUtility.findCurrentWord(userInputs.getText().toString())));
                 break;
             case R.id.bk:
                 //some of this could be folded into the mutatekeys function
-                if(!editField.getText().toString().isEmpty()) {
-                    editField.setText(editField.getText().subSequence(0, editField.getText().length() - 1));
+                if(!userInputs.getText().toString().isEmpty()) {
+                    userInputs.setText(userInputs.getText().subSequence(0, userInputs.getText().length() - 1));
 
-                    if(editField.getText().toString().isEmpty()) {
+                    if(userInputs.getText().toString().isEmpty()) {
                         for (int i = 0; i < 27; i++) {
                             butts[i].setBackgroundColor(Color.parseColor(neutralColor));
                         }
                     }else {
-                            mutateKeys((float[]) probabilitySet.get(MiscUtility.findCurrentWord(editField.getText().toString())));
+                            mutateKeys((float[]) probabilitySet.get(MiscUtility.findCurrentWord(userInputs.getText().toString())));
                         }
                     }
                 break;
             case R.id.space:
-                editField.setText(editField.getText() + " ");
+                userInputs.setText(userInputs.getText() + " ");
                 for (int i = 0; i < 27; i++) {
                     butts[i].setBackgroundColor(Color.parseColor(neutralColor));
                 }
                 break;
             case R.id.test:
-                Log.i("DEBUG", editField.getText().toString());
-                float[] prob = (float[]) probabilitySet.get(editField.getText().toString());
+                Log.i("DEBUG", userInputs.getText().toString());
+                float[] prob = (float[]) probabilitySet.get(userInputs.getText().toString());
                 for(int i = 0; i < prob.length; i++) {
                     Log.i("DEBUG", "Letter = " + MiscUtility.mapNumberToLetter(i) + ", prob: " + prob[i]);
                 }
                 break;
+            case R.id.enter:
+                Log.i("DEBUG", userInputs.getText().toString());
+                // Analyze speed and accuracy
+                // Write data to file
+                //TODO
+                
+
+                // If that was the last phrase, navigate to selection activity
+                if(phraseCounter == 4) {
+                    phraseCounter = 0;
+                    Intent intent = new Intent(getBaseContext(), SelectionActivity.class);
+                    startActivity(intent);
+                }
+                // Push the next phrase
+                phraseCounter++;
+                phraseHolder.setText(phrases[phraseCounter]);
+                // Clear the user input area
+                userInputs.setText("");
+
+                break;
+
+
             default:
 
         }
