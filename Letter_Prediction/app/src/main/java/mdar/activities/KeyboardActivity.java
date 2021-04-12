@@ -36,6 +36,8 @@ Button [] butts = new Button[26];
 HashMap probabilitySet;
 String neutralColor = "#FFd8e6db";
 String keyboardType = "";
+String userName = "";
+String group = "";
 int phraseCounter = 0;
 Model model;
 
@@ -51,6 +53,9 @@ private void init() {
     initializeViews();
     probabilitySet = GlobalMap.probs;
     keyboardType = getIntent().getStringExtra("KEYBOARD_TYPE");
+    userName = getIntent().getStringExtra("USER_NAME");
+    group = getIntent().getStringExtra("GROUP_NAME");
+
     model = new Model();
     phraseHolder.setText(model.phrases[0]);
 }

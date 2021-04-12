@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Spinner;
 import androidx.appcompat.app.AppCompatActivity;
@@ -25,7 +26,8 @@ Spinner spinner;
 HashMap probabilitySet;
 ProgressBar progressBar;
 Button start;
-
+EditText userName;
+EditText groupName;
 //this is the default value
 String keyboardType = "Vanilla";
 
@@ -39,6 +41,8 @@ String keyboardType = "Vanilla";
 private void init() {
     spinner = (Spinner) findViewById(R.id.keyboard_spinner);
     start = (Button) findViewById(R.id.button_start);
+    userName = (EditText) findViewById(R.id.userNameTextView);
+    groupName = (EditText) findViewById(R.id.groupNameTextView);
     spinner.setOnItemSelectedListener(this);
     ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
             R.array.keyboard_array, android.R.layout.simple_spinner_item);
@@ -67,7 +71,11 @@ private void init() {
     public void startTrials(View view) {
         Intent intent = new Intent(getBaseContext(), KeyboardActivity.class);
         intent.putExtra("KEYBOARD_TYPE", keyboardType);
-     //   Intent switchActivityIntent = new Intent(this, KeyboardActivity.class);
+        intent.putExtra("USER_NAME", userName.getText());
+        intent.putExtra("GROUP_NAME", groupName.getText());
+
+
+        //   Intent switchActivityIntent = new Intent(this, KeyboardActivity.class);
         startActivity(intent);
     }
 
