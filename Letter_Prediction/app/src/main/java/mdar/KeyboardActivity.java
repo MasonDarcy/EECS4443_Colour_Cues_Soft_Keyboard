@@ -9,14 +9,10 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.example.letter_prediction.R;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.ObjectInputStream;
 import java.util.HashMap;
 
 import static java.lang.Character.toLowerCase;
@@ -27,13 +23,13 @@ email: masondarcy@gmail.com
 date: 2021/03/29
  */
 
-public class MainActivity extends AppCompatActivity {
+public class KeyboardActivity extends AppCompatActivity {
 TextView editField;
 Button a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, r, s, t, u, v, w, x, y, z, bk, space, test;
 Button [] butts = new Button[27];
 HashMap probabilitySet;
-ProgressBar progressBar;
 String neutralColor = "#FFd8e6db";
+String keyboardType = "";
 
 @RequiresApi(api = Build.VERSION_CODES.N)
 @Override
@@ -41,8 +37,11 @@ protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         initializeViews();
-        runStartupThreads();
-    }
+        probabilitySet = GlobalMap.probs;
+        keyboardType = getIntent().getStringExtra("KEYBOARD_TYPE");
+        Log.i("DEBUG", keyboardType);
+
+}
 
 /*
 mutateKeys loops through all the keys and changed their colors.
@@ -51,7 +50,8 @@ mutateKeys loops through all the keys and changed their colors.
 private void mutateKeys(float[] probs) {
         if (probs != null) {
                 for (int i = 0; i < probs.length; i++) {
-                    butts[i].setBackgroundColor(Color.parseColor((MiscUtility.unstableProbToColor(probs[i]))));
+               //     butts[i].setBackgroundColor(Color.parseColor((MiscUtility.greenRedProbToColor(probs[i]))));
+                    butts[i].setBackgroundColor(Color.parseColor((MiscUtility.probToColor(probs[i], keyboardType))));
                 }
         } else {
             for (int i = 0; i < 27; i++) {
@@ -69,53 +69,6 @@ private void setButtons(boolean state) {
             butts[i].setEnabled(state);
         }
         space.setEnabled(state);
-}
-
-/*
-Creates a thread off the main UI thread to read data from a raw file to populate a hashmap.
-Disables and re-enables the buttons.
- */
-private void runStartupThreads() {
-    setButtons(false);
-    new Thread(new Runnable() {
-        @Override
-        public void run() {
-            try
-            {
-                InputStream ins = getResources().openRawResource(
-                        getResources().getIdentifier("hash",
-                                "raw", getPackageName()));
-                ObjectInputStream in = new ObjectInputStream(ins);
-
-                // Method for deserialization of object
-                probabilitySet = (HashMap<String, float[]>) in.readObject();
-
-                runOnUiThread(new Runnable() {
-
-                    @Override
-                    public void run() {
-                        progressBar.setVisibility(View.GONE);
-                        setButtons(true);
-                    }
-                });
-                in.close();
-                ins.close();
-
-            }
-
-            catch(IOException ex)
-            {
-                System.out.println("IOException is caught");
-            }
-            catch(ClassNotFoundException ex)
-            {
-                System.out.println("ClassNotFoundException is caught");
-            }
-
-
-
-        }
-    }).start();
 }
 
 private void initializeViews() {
@@ -175,7 +128,7 @@ private void initializeViews() {
         butts[26] = bk;
         space = findViewById(R.id.space);
         editField = findViewById(R.id.testLabelOne);
-        progressBar = findViewById(R.id.progressBar);
+       // progressBar = findViewById(R.id.progressBar);
         test = findViewById(R.id.test);
 
     }
@@ -185,7 +138,6 @@ public void onClick(View view) {
             case R.id.a:
                 editField.setText(editField.getText() + "a");
                 mutateKeys((float[]) probabilitySet.get(MiscUtility.findCurrentWord(editField.getText().toString())));
-                Log.i("DEBUG", "Test: " + MiscUtility.findCurrentWord(editField.getText().toString()));
                 break;
             case R.id.b:
                 editField.setText(editField.getText() + "b");

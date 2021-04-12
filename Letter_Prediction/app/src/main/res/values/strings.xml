@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">Letter_Prediction</string>
+    <string-array name="keyboard_array">
+        <item>Vanilla</item>
+        <item>Green Red</item>
+        <item>Green Only</item>
+    </string-array>
 </resources>
