@@ -25,10 +25,9 @@ Spinner spinner;
 HashMap probabilitySet;
 ProgressBar progressBar;
 Button start;
+
+//this is the default value
 String keyboardType = "Vanilla";
-
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,8 +35,6 @@ String keyboardType = "Vanilla";
         setContentView(R.layout.selection_main);
         init();
     }
-
-
 
 private void init() {
     spinner = (Spinner) findViewById(R.id.keyboard_spinner);

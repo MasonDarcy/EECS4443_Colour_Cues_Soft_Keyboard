@@ -9,8 +9,18 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name="mdar.activities.KeyboardActivity"></activity>
-        <activity android:name="mdar.activities.SelectionActivity">
+        <activity
+            android:name="mdar.activities.KeyboardActivity"
+            android:screenOrientation="landscape"
+            android:configChanges="keyboardHidden|orientation|screenSize">
+
+        </activity>
+        <activity android:name="mdar.activities.SelectionActivity"
+            android:screenOrientation="landscape"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            >
+
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

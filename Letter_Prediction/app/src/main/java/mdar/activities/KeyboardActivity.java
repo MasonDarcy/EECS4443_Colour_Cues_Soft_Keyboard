@@ -32,7 +32,7 @@ public class KeyboardActivity extends AppCompatActivity {
 TextView userInputs;
 TextView phraseHolder;
 Button a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, r, s, t, u, v, w, x, y, z, bk, space, test;
-Button [] butts = new Button[27];
+Button [] butts = new Button[26];
 HashMap probabilitySet;
 String neutralColor = "#FFd8e6db";
 String keyboardType = "";
@@ -65,22 +65,11 @@ private void mutateKeys(float[] probs) {
                     butts[i].setBackgroundColor(Color.parseColor((ColorUtility.probToColor(probs[i], keyboardType))));
                 }
         } else {
-            for (int i = 0; i < 27; i++) {
+            for (int i = 0; i < butts.length; i++) {
                 butts[i].setBackgroundColor(Color.parseColor(neutralColor));
             }
         }
     }
-
-/*
-disables or enables buttons so the program doesn't crash while loading resources
-@param: boolean that represents if keys should be enabled or disabled
- */
-private void setButtons(boolean state) {
-        for(int i = 0; i < butts.length; i ++) {
-            butts[i].setEnabled(state);
-        }
-        space.setEnabled(state);
-}
 
 private void initializeViews() {
         a = findViewById(R.id.a);
@@ -136,7 +125,7 @@ private void initializeViews() {
         z = findViewById(R.id.z);
         butts[25] = z;
         bk = findViewById(R.id.bk);
-        butts[26] = bk;
+      //  butts[26] = bk;
         space = findViewById(R.id.space);
         userInputs = findViewById(R.id.userInputs);
        // progressBar = findViewById(R.id.progressBar);
@@ -280,9 +269,11 @@ public void onClick(View view) {
                 //some of this could be folded into the mutatekeys function
                 if(!userInputs.getText().toString().isEmpty()) {
                     userInputs.setText(userInputs.getText().subSequence(0, userInputs.getText().length() - 1));
-
+                      Log.i("DEBUG", "Got here");
                     if(userInputs.getText().toString().isEmpty()) {
-                        for (int i = 0; i < 27; i++) {
+                        for (int i = 0; i < butts.length; i++) {
+                            Log.i("DEBUG", "Got here: " + i);
+
                             butts[i].setBackgroundColor(Color.parseColor(neutralColor));
                         }
                     }else {
@@ -293,15 +284,8 @@ public void onClick(View view) {
             case R.id.space:
                 model.toggle();
                 userInputs.setText(userInputs.getText() + " ");
-                for (int i = 0; i < 27; i++) {
+                for (int i = 0; i < butts.length; i++) {
                     butts[i].setBackgroundColor(Color.parseColor(neutralColor));
-                }
-                break;
-            case R.id.test:
-                Log.i("DEBUG", userInputs.getText().toString());
-                float[] prob = (float[]) probabilitySet.get(userInputs.getText().toString());
-                for(int i = 0; i < prob.length; i++) {
-                    Log.i("DEBUG", "Letter = " + ColorUtility.mapNumberToLetter(i) + ", prob: " + prob[i]);
                 }
                 break;
             case R.id.enter:
@@ -326,8 +310,8 @@ public void onClick(View view) {
                     userInputs.setText("");
                     //Reset the keyboard colors
                     //TODO
+                    mutateKeys(null);
                 }
-
                 break;
 
 
@@ -335,4 +319,5 @@ public void onClick(View view) {
 
         }
     }
+
 }

@@ -12,7 +12,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginTop="90dp"
+        android:layout_marginTop="30dp"
         android:text="" />
 
 
@@ -21,7 +21,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginTop="90dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginBottom="30dp"
+
         android:text="" />
 
     <TableLayout
@@ -30,7 +32,9 @@
 
         <TableRow
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:gravity="center_horizontal"
+            android:translationX="-20dp">
 
             <Button
                 android:id="@+id/q"
@@ -103,10 +107,16 @@
                 android:text="p" />
 
         </TableRow>
+    </TableLayout>
 
-        <TableRow
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    <TableRow
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal">
 
 
             <Button
@@ -173,18 +183,26 @@
                 android:onClick="onClick"
                 android:text="l" />
 
-            <Button
-                android:id="@+id/bk"
-                android:layout_width="37dp"
-                android:layout_height="38dp"
-                android:onClick="onClick"
-                android:text="-" />
+        <Button
+            android:id="@+id/bk"
+            android:layout_width="61dp"
+            android:layout_height="38dp"
+            android:onClick="onClick"
+            android:text="bk" />
 
         </TableRow>
 
+    </TableLayout>
+
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
         <TableRow
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:gravity="center_horizontal"
+            android:translationX="-35dp">
 
             <Button
                 android:id="@+id/z"
@@ -243,20 +261,19 @@
                 android:text="en" />
         </TableRow>
 
+    </TableLayout>
+
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
         <TableRow
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <Button
-                android:id="@+id/test"
-                android:layout_width="37dp"
-                android:layout_height="38dp"
-                android:onClick="onClick"
-                android:text="%" />
+            android:layout_height="match_parent"
+            android:gravity="center_horizontal">
 
             <Button
                 android:id="@+id/space"
-                android:layout_width="37dp"
+                android:layout_width="189dp"
                 android:layout_height="38dp"
                 android:onClick="onClick"
                 android:text="_______" />
