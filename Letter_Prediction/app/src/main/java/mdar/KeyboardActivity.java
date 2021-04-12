@@ -33,14 +33,7 @@ HashMap probabilitySet;
 String neutralColor = "#FFd8e6db";
 String keyboardType = "";
 int phraseCounter = 0;
-    //Could move this to a string resource or data class if we care
-    String [] phrases =
-            {"The quick brown fox jumped over the lazy dog",
-                    "You can't judge a book by its cover",
-                    "This sentence is incredibly difficult to type",
-                    "Acrophobia is a natural fear of heights",
-                    "A cephalopod is any member of the molluscan class Cephalopoda"};
-
+Model model;
 
 @RequiresApi(api = Build.VERSION_CODES.N)
 @Override
@@ -54,7 +47,8 @@ private void init() {
     initializeViews();
     probabilitySet = GlobalMap.probs;
     keyboardType = getIntent().getStringExtra("KEYBOARD_TYPE");
-    phraseHolder.setText(phrases[0]);
+    model = new Model();
+    phraseHolder.setText(model.phrases[0]);
 }
 
 /*
@@ -149,106 +143,132 @@ private void initializeViews() {
 public void onClick(View view) {
         switch(view.getId()) {
             case R.id.a:
+                model.toggle();
                 userInputs.setText(userInputs.getText() + "a");
                 mutateKeys((float[]) probabilitySet.get(MiscUtility.findCurrentWord(userInputs.getText().toString())));
                 break;
             case R.id.b:
+                model.toggle();
                 userInputs.setText(userInputs.getText() + "b");
                 mutateKeys((float[]) probabilitySet.get(MiscUtility.findCurrentWord(userInputs.getText().toString())));
                 break;
             case R.id.c:
+                model.toggle();
                 userInputs.setText(userInputs.getText() + "c");
                 mutateKeys((float[]) probabilitySet.get(MiscUtility.findCurrentWord(userInputs.getText().toString())));
                 break;
             case R.id.d:
+                model.toggle();
                 userInputs.setText(userInputs.getText() + "d");
                 mutateKeys((float[]) probabilitySet.get(MiscUtility.findCurrentWord(userInputs.getText().toString())));
                 break;
             case R.id.e:
+                model.toggle();
                 userInputs.setText(userInputs.getText() + "e");
                 mutateKeys((float[]) probabilitySet.get(MiscUtility.findCurrentWord(userInputs.getText().toString())));
                 break;
             case R.id.f:
+                model.toggle();
                 userInputs.setText(userInputs.getText() + "f");
                 mutateKeys((float[]) probabilitySet.get(MiscUtility.findCurrentWord(userInputs.getText().toString())));
                 break;
             case R.id.g:
+                model.toggle();
                 userInputs.setText(userInputs.getText() + "g");
                 mutateKeys((float[]) probabilitySet.get(MiscUtility.findCurrentWord(userInputs.getText().toString())));
                 break;
             case R.id.h:
+                model.toggle();
                 userInputs.setText(userInputs.getText() + "h");
                 mutateKeys((float[]) probabilitySet.get(MiscUtility.findCurrentWord(userInputs.getText().toString())));
                 break;
             case R.id.i:
+                model.toggle();
                 userInputs.setText(userInputs.getText() + "i");
                 mutateKeys((float[]) probabilitySet.get(MiscUtility.findCurrentWord(userInputs.getText().toString())));
                 break;
             case R.id.j:
+                model.toggle();
                 userInputs.setText(userInputs.getText() + "j");
                 mutateKeys((float[]) probabilitySet.get(MiscUtility.findCurrentWord(userInputs.getText().toString())));
                 break;
             case R.id.k:
+                model.toggle();
                 userInputs.setText(userInputs.getText() + "k");
                 mutateKeys((float[]) probabilitySet.get(MiscUtility.findCurrentWord(userInputs.getText().toString())));
                 break;
             case R.id.l:
+                model.toggle();
                 userInputs.setText(userInputs.getText() + "l");
                 mutateKeys((float[]) probabilitySet.get(MiscUtility.findCurrentWord(userInputs.getText().toString())));
                 break;
             case R.id.m:
+                model.toggle();
                 userInputs.setText(userInputs.getText() + "m");
                 mutateKeys((float[]) probabilitySet.get(MiscUtility.findCurrentWord(userInputs.getText().toString())));
                 break;
             case R.id.n:
+                model.toggle();
                 userInputs.setText(userInputs.getText() + "n");
                 mutateKeys((float[]) probabilitySet.get(MiscUtility.findCurrentWord(userInputs.getText().toString())));
                 break;
             case R.id.o:
+                model.toggle();
                 userInputs.setText(userInputs.getText() + "o");
                 mutateKeys((float[]) probabilitySet.get(MiscUtility.findCurrentWord(userInputs.getText().toString())));
                 break;
             case R.id.p:
+                model.toggle();
                 userInputs.setText(userInputs.getText() + "p");
                 mutateKeys((float[]) probabilitySet.get(MiscUtility.findCurrentWord(userInputs.getText().toString())));
                 break;
             case R.id.q:
+                model.toggle();
                 userInputs.setText(userInputs.getText() + "q");
                 mutateKeys((float[]) probabilitySet.get(MiscUtility.findCurrentWord(userInputs.getText().toString())));
                 break;
             case R.id.r:
+                model.toggle();
                 userInputs.setText(userInputs.getText() + "r");
                 mutateKeys((float[]) probabilitySet.get(MiscUtility.findCurrentWord(userInputs.getText().toString())));
                 break;
             case R.id.s:
+                model.toggle();
                 userInputs.setText(userInputs.getText() + "s");
                 mutateKeys((float[]) probabilitySet.get(MiscUtility.findCurrentWord(userInputs.getText().toString())));
                 break;
             case R.id.t:
+                model.toggle();
                 userInputs.setText(userInputs.getText() + "t");
                 mutateKeys((float[]) probabilitySet.get(MiscUtility.findCurrentWord(userInputs.getText().toString())));
                 break;
             case R.id.u:
+                model.toggle();
                 userInputs.setText(userInputs.getText() + "u");
                 mutateKeys((float[]) probabilitySet.get(MiscUtility.findCurrentWord(userInputs.getText().toString())));
                 break;
             case R.id.v:
+                model.toggle();
                 userInputs.setText(userInputs.getText() + "v");
                 mutateKeys((float[]) probabilitySet.get(MiscUtility.findCurrentWord(userInputs.getText().toString())));
                 break;
             case R.id.w:
+                model.toggle();
                 userInputs.setText(userInputs.getText() + "w");
                 mutateKeys((float[]) probabilitySet.get(MiscUtility.findCurrentWord(userInputs.getText().toString())));
                 break;
             case R.id.x:
+                model.toggle();
                 userInputs.setText(userInputs.getText() + "x");
                 mutateKeys((float[]) probabilitySet.get(MiscUtility.findCurrentWord(userInputs.getText().toString())));
                 break;
             case R.id.y:
+                model.toggle();
                 userInputs.setText(userInputs.getText() + "y");
                 mutateKeys((float[]) probabilitySet.get(MiscUtility.findCurrentWord(userInputs.getText().toString())));
                 break;
             case R.id.z:
+                model.toggle();
                 userInputs.setText(userInputs.getText() + "z");
                 mutateKeys((float[]) probabilitySet.get(MiscUtility.findCurrentWord(userInputs.getText().toString())));
                 break;
@@ -267,6 +287,7 @@ public void onClick(View view) {
                     }
                 break;
             case R.id.space:
+                model.toggle();
                 userInputs.setText(userInputs.getText() + " ");
                 for (int i = 0; i < 27; i++) {
                     butts[i].setBackgroundColor(Color.parseColor(neutralColor));
@@ -284,19 +305,24 @@ public void onClick(View view) {
                 // Analyze speed and accuracy
                 // Write data to file
                 //TODO
-                
+                model.endTime();
+                model.hasStartedTyping = false;
+                Log.i("DEBUG", "Elapsed time: " + model.getElapsedTime());
 
                 // If that was the last phrase, navigate to selection activity
                 if(phraseCounter == 4) {
                     phraseCounter = 0;
                     Intent intent = new Intent(getBaseContext(), SelectionActivity.class);
                     startActivity(intent);
+                } else {
+                    // Push the next phrase
+                    phraseCounter++;
+                    phraseHolder.setText(model.phrases[phraseCounter]);
+                    // Clear the user input area
+                    userInputs.setText("");
+                    //Reset the keyboard colors
+                    //TODO
                 }
-                // Push the next phrase
-                phraseCounter++;
-                phraseHolder.setText(phrases[phraseCounter]);
-                // Clear the user input area
-                userInputs.setText("");
 
                 break;
 
