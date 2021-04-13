@@ -3,10 +3,12 @@ package mdar.activities;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -14,16 +16,21 @@ import android.widget.TextView;
 
 import com.example.letter_prediction.R;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStreamWriter;
 import java.util.HashMap;
 
 import mdar.model.ColorUtility;
-import mdar.model.GlobalMap;
-import mdar.model.Model;
+import mdar.model.SubstringProbabilityMap;
+import mdar.model.TimeUtility;
 
 import static java.lang.Character.toLowerCase;
 
 /*
-author: Mason D'arcy
+author: Mason D'Arcy
 email: masondarcy@gmail.com
 date: 2021/03/29
  */
@@ -31,6 +38,7 @@ date: 2021/03/29
 public class KeyboardActivity extends AppCompatActivity {
 TextView userInputs;
 TextView phraseHolder;
+final int NUM_TRIALS = 5;
 Button a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, r, s, t, u, v, w, x, y, z, bk, space;
 Button [] butts = new Button[26];
 HashMap probabilitySet;
@@ -39,7 +47,10 @@ String keyboardType = "";
 String userName = "";
 String group = "";
 int phraseCounter = 0;
-Model model;
+TimeUtility timeUtility;
+String[] phrases;
+String[] times = new String[NUM_TRIALS];
+String[] accuracies = new String[NUM_TRIALS];
 
 @RequiresApi(api = Build.VERSION_CODES.N)
 @Override
@@ -51,12 +62,17 @@ protected void onCreate(Bundle savedInstanceState) {
 
     private void init() {
     initializeViews();
-    probabilitySet = GlobalMap.probs;
+  //  initializeDataDirectory();
+    phrases = getResources().getStringArray(R.array.phrases);
+    probabilitySet = SubstringProbabilityMap.probs;
     keyboardType = getIntent().getStringExtra("KEYBOARD_TYPE");
+    Log.i("MYDEBUG", userName);
     userName = getIntent().getStringExtra("USER_NAME");
     group = getIntent().getStringExtra("GROUP_NAME");
-    model = new Model();
-    phraseHolder.setText(model.phrases[0]);
+        Log.i("MYDEBUG", userName);
+        Log.i("MYDEBUG", group);
+    timeUtility = new TimeUtility();
+    phraseHolder.setText(phrases[0]);
 }
     private void initializeViews() {
         a = findViewById(R.id.a);
@@ -214,7 +230,7 @@ protected void onCreate(Bundle savedInstanceState) {
     }
     /*onClick helper functions-------------------------------------------------------------------*/
     private void keyStroke(String c) {
-        model.toggle();
+        timeUtility.toggle();
         userInputs.setText(userInputs.getText() + c);
         updateKeyColors((float[]) probabilitySet.get(ColorUtility.findCurrentWord(userInputs.getText().toString())));
     }
@@ -233,7 +249,7 @@ protected void onCreate(Bundle savedInstanceState) {
     }
 
     private void space() {
-        model.toggle();
+        timeUtility.toggle();
         userInputs.setText(userInputs.getText() + " ");
         for (int i = 0; i < butts.length; i++) {
             butts[i].setBackgroundColor(Color.parseColor(neutralColor));
@@ -241,28 +257,33 @@ protected void onCreate(Bundle savedInstanceState) {
 
     }
 
-    private void enter() {
+    private void enter()  {
         Log.i("DEBUG", userInputs.getText().toString());
         // Analyze speed and accuracy
         // Write data to file
         //TODO
-        model.endTime();
-        model.hasStartedTyping = false;
-        Log.i("DEBUG", "Elapsed time: " + model.getElapsedTime());
-
+        timeUtility.endTime();
+        timeUtility.hasStartedTyping = false;
+        String time = String.valueOf(timeUtility.getElapsedTime());
+        Log.i("DEBUG", "Elapsed time: " + time);
+        times[phraseCounter] = time;
         // If that was the last phrase, navigate to selection activity
         if(phraseCounter == 4) {
             phraseCounter = 0;
-            Intent intent = new Intent(getBaseContext(), SelectionActivity.class);
+            Intent intent = new Intent(getBaseContext(), ResultsActivity.class);
+            intent.putExtra("TIMES", times);
+            //intent.putExtra("ACCURACIES", accuracies);
+            intent.putExtra("NAME", userName);
+            intent.putExtra("GROUP", group);
             startActivity(intent);
+
         } else {
             // Push the next phrase
             phraseCounter++;
-            phraseHolder.setText(model.phrases[phraseCounter]);
+            phraseHolder.setText(phrases[phraseCounter]);
             // Clear the user input area
             userInputs.setText("");
             //Reset the keyboard colors
-            //TODO
             updateKeyColors(null);
         }
     }
@@ -279,7 +300,6 @@ protected void onCreate(Bundle savedInstanceState) {
         }
     }
     /*-------------------------------------------------------------------------------------------*/
-
 
 
 }

@@ -5,4 +5,11 @@
         <item>Green Red</item>
         <item>Green Only</item>
     </string-array>
+    <string-array name="phrases">
+        <item>the quick brown fox jumped over the lazy dog</item>
+        <item>the five boxing wizards jump quickly</item>
+        <item>glib jocks quiz nymph to vex dwarf</item>
+        <item>jackdaws love my big sphinx of quartz</item>
+        <item>pack my box with five dozen liquor jugs</item>
+    </string-array>
 </resources>

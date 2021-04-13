@@ -2,7 +2,6 @@ package mdar.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -18,7 +17,7 @@ import java.io.InputStream;
 import java.io.ObjectInputStream;
 import java.util.HashMap;
 
-import mdar.model.GlobalMap;
+import mdar.model.SubstringProbabilityMap;
 
 public class SelectionActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
@@ -28,7 +27,6 @@ ProgressBar progressBar;
 Button start;
 EditText userName;
 EditText groupName;
-//this is the default value
 String keyboardType = "Vanilla";
 
     @Override
@@ -38,7 +36,7 @@ String keyboardType = "Vanilla";
         init();
     }
 
-private void init() {
+    private void init() {
     spinner = (Spinner) findViewById(R.id.keyboard_spinner);
     start = (Button) findViewById(R.id.button_start);
     userName = (EditText) findViewById(R.id.userNameTextView);
@@ -51,40 +49,23 @@ private void init() {
     progressBar = findViewById(R.id.progressBar);
 
     //Checks if the file is already loaded, if we are launching an intent to come back here
-    if(!GlobalMap.isLoaded) {
+    if(!SubstringProbabilityMap.isLoaded) {
         runStartupThreads();
     } else {
         progressBar.setVisibility(View.GONE);
     }
 }
 
-    public void onItemSelected(AdapterView<?> parent, View view,
-                               int pos, long id) {
-        keyboardType = parent.getItemAtPosition(pos).toString();
-        Log.i("DEBUG", keyboardType);
-    }
-
-    public void onNothingSelected(AdapterView<?> parent) {
-        // Another interface callback
-    }
-
     public void startTrials(View view) {
         Intent intent = new Intent(getBaseContext(), KeyboardActivity.class);
         intent.putExtra("KEYBOARD_TYPE", keyboardType);
-        intent.putExtra("USER_NAME", userName.getText());
-        intent.putExtra("GROUP_NAME", groupName.getText());
-
-
-        //   Intent switchActivityIntent = new Intent(this, KeyboardActivity.class);
+        intent.putExtra("USER_NAME", userName.getText().toString());
+        intent.putExtra("GROUP_NAME", groupName.getText().toString());
         startActivity(intent);
     }
 
-    private void setButtons(boolean state) {
-        start.setEnabled(state);
-    }
-
     private void runStartupThreads() {
-        setButtons(false);
+        start.setEnabled(false);
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -97,14 +78,14 @@ private void init() {
 
                     // Method for deserialization of object
                     probabilitySet = (HashMap<String, float[]>) in.readObject();
-                    GlobalMap.setMap(probabilitySet);
-                    GlobalMap.isLoaded = true;
+                    SubstringProbabilityMap.setMap(probabilitySet);
+                    SubstringProbabilityMap.isLoaded = true;
                     runOnUiThread(new Runnable() {
 
                         @Override
                         public void run() {
                             progressBar.setVisibility(View.GONE);
-                            setButtons(true);
+                            start.setEnabled(true);
                         }
                     });
                     in.close();
@@ -127,4 +108,12 @@ private void init() {
         }).start();
     }
 
+    /*Spinner implementation-----------------------------------------------------------*/
+    public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
+        keyboardType = parent.getItemAtPosition(pos).toString();
+    }
+    public void onNothingSelected(AdapterView<?> parent) {
+        // Another interface callback
+    }
+    /*---------------------------------------------------------------------------------*/
 }
