@@ -267,7 +267,11 @@ protected void onCreate(Bundle savedInstanceState) {
         timeUtility.hasStartedTyping = false;
         String time = String.valueOf(timeUtility.getElapsedTime());
         times[phraseCounter] = time;
-        accuracies[phraseCounter] = String.valueOf(getAccuracy(phrases[phraseCounter], userInputs.getText().toString()));
+        double accuracy = getAccuracy(phrases[phraseCounter], userInputs.getText().toString());
+        String acc = String.format("%.5f", accuracy);
+       // accuracies[phraseCounter] = String.valueOf(getAccuracy(phrases[phraseCounter], userInputs.getText().toString()));
+        accuracies[phraseCounter] = acc;
+
         if(phraseCounter == 4) {
             phraseCounter = 0;
             Intent intent = new Intent(getBaseContext(), ResultsActivity.class);
