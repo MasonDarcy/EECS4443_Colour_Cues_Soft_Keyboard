@@ -16,6 +16,11 @@ import android.widget.TextView;
 
 import com.example.letter_prediction.R;
 
+import net.ricecode.similarity.JaroWinklerStrategy;
+import net.ricecode.similarity.SimilarityStrategy;
+import net.ricecode.similarity.StringSimilarityService;
+import net.ricecode.similarity.StringSimilarityServiceImpl;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -69,8 +74,6 @@ protected void onCreate(Bundle savedInstanceState) {
     Log.i("MYDEBUG", userName);
     userName = getIntent().getStringExtra("USER_NAME");
     group = getIntent().getStringExtra("GROUP_NAME");
-        Log.i("MYDEBUG", userName);
-        Log.i("MYDEBUG", group);
     timeUtility = new TimeUtility();
     phraseHolder.setText(phrases[0]);
 }
@@ -260,19 +263,16 @@ protected void onCreate(Bundle savedInstanceState) {
     private void enter()  {
         Log.i("DEBUG", userInputs.getText().toString());
         // Analyze speed and accuracy
-        // Write data to file
-        //TODO
         timeUtility.endTime();
         timeUtility.hasStartedTyping = false;
         String time = String.valueOf(timeUtility.getElapsedTime());
-        Log.i("DEBUG", "Elapsed time: " + time);
         times[phraseCounter] = time;
-        // If that was the last phrase, navigate to selection activity
+        accuracies[phraseCounter] = String.valueOf(getAccuracy(phrases[phraseCounter], userInputs.getText().toString()));
         if(phraseCounter == 4) {
             phraseCounter = 0;
             Intent intent = new Intent(getBaseContext(), ResultsActivity.class);
             intent.putExtra("TIMES", times);
-            //intent.putExtra("ACCURACIES", accuracies);
+            intent.putExtra("ACCURACIES", accuracies);
             intent.putExtra("NAME", userName);
             intent.putExtra("GROUP", group);
             startActivity(intent);
@@ -301,5 +301,9 @@ protected void onCreate(Bundle savedInstanceState) {
     }
     /*-------------------------------------------------------------------------------------------*/
 
-
+    private double getAccuracy(String target, String source) {
+        SimilarityStrategy strat = new JaroWinklerStrategy();
+        StringSimilarityService service = new StringSimilarityServiceImpl(strat);
+        return service.score(source, target);
+    }
 }

@@ -33,7 +33,7 @@ private TextView accuraciesHolder;
 
     private void init() {
         times = getIntent().getStringArrayExtra("TIMES");
-        //accuracies = getIntent().getStringArrayExtra("ACCURACIES");
+        accuracies = getIntent().getStringArrayExtra("ACCURACIES");
         userName = getIntent().getStringExtra("NAME");
         group = getIntent().getStringExtra("GROUP");
     }
@@ -49,7 +49,7 @@ private TextView accuraciesHolder;
         nameHolder.setText(userName);
         groupHolder.setText(group);
         timesHolder.setText(arrayToString(times));
-        //accuraciesHolder.setText(accuracies.toString());
+        accuraciesHolder.setText(arrayToString(accuracies));
     }
     public void onClick(View view) {
         Intent intent = new Intent(getBaseContext(), SelectionActivity.class);
