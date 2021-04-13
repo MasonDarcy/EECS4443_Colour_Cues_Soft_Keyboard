@@ -252,12 +252,6 @@
                 android:onClick="onClick"
                 android:text="m" />
 
-            <Button
-                android:id="@+id/enter"
-                android:layout_width="45dp"
-                android:layout_height="38dp"
-                android:onClick="onClick"
-                android:text="en" />
         </TableRow>
 
     </TableLayout>
@@ -280,5 +274,16 @@
 
     </TableLayout>
 
+
+    <Button
+        android:id="@+id/enter"
+        android:layout_width="wrap_content"
+        android:layout_height="38dp"
+
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="10dp"
+        android:onClick="onClick"
+        android:text="Finish phrase"
+        android:translationX="150dp" />
 
 </LinearLayout>

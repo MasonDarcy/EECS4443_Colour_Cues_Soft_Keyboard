@@ -269,7 +269,6 @@ protected void onCreate(Bundle savedInstanceState) {
         times[phraseCounter] = time;
         double accuracy = getAccuracy(phrases[phraseCounter], userInputs.getText().toString());
         String acc = String.format("%.5f", accuracy);
-       // accuracies[phraseCounter] = String.valueOf(getAccuracy(phrases[phraseCounter], userInputs.getText().toString()));
         accuracies[phraseCounter] = acc;
 
         if(phraseCounter == 4) {
