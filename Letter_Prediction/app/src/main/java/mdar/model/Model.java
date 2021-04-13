@@ -3,14 +3,15 @@ package mdar.model;
 public class Model {
 
     public final String [] phrases =
-            {       "The quick brown fox jumped over the lazy dog",
-                    "You can't judge a book by its cover",
-                    "This sentence is incredibly difficult to type",
-                    "Acrophobia is a natural fear of heights",
-                    "A cephalopod is any member of the molluscan class Cephalopoda"
+            {
+                    "the quick brown fox jumped over the lazy dog",
+                    "the five boxing wizards jump quickly",
+                    "glib jocks quiz nymph to vex dwarf",
+                    "jackdaws love my big sphinx of quartz",
+                    "pack my box with five dozen liquor jugs"
             };
 
-
+   public String alphabet = "abcdefghijklmnopqrstuvwxyz";
     private long currentStart = 0;
     private long currentEnd = 0;
     public boolean hasStartedTyping = false;
